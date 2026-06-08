@@ -6,7 +6,9 @@ initial superset dialect while keeping LambdaMOO compatibility in view.
 ## Status
 
 This parser currently validates against 446 checked-in valid MOO verb fixtures
-imported from `moo-for-llms`, with no `ERROR` or `MISSING` nodes.
+imported from
+[`moo-for-llms`](https://github.com/SindomeCorp/moo-for-llms), with no `ERROR`
+or `MISSING` nodes.
 
 Supported language surface includes:
 
@@ -76,7 +78,8 @@ fixture and fails if the syntax tree contains `ERROR` or `MISSING`.
 See `fixtures/README.md` for fixture provenance, licensing, and import
 behavior.
 
-To refresh fixtures from a local `moo-for-llms` checkout:
+To refresh fixtures from a local
+[`moo-for-llms`](https://github.com/SindomeCorp/moo-for-llms) checkout:
 
 ```sh
 MOO_FOR_LLMS=/path/to/moo-for-llms npm run import:fixtures:all

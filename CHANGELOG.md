@@ -18,7 +18,8 @@ Initial public release.
 - Generated parser and bindings for common Tree-sitter package targets.
 - Neovim query files and setup documentation.
 - Helix and Emacs setup notes.
-- 446 valid MOO fixtures imported from `moo-for-llms`.
+- 446 valid MOO fixtures imported from
+  [`moo-for-llms`](https://github.com/SindomeCorp/moo-for-llms).
 - Strict fixture validator that fails on `ERROR` or `MISSING` parse nodes.
 - GitHub Actions CI.
 

@@ -17,8 +17,9 @@ The import process is handled by `scripts/import-fixtures.js`.
 
 ## Import Behavior
 
-The source examples in `moo-for-llms` may include leading metadata encoded as
-MOO string statements, for example:
+The source examples in
+[`moo-for-llms`](https://github.com/SindomeCorp/moo-for-llms) may include
+leading metadata encoded as MOO string statements, for example:
 
 ```moo
 "title: literals-and-values";
@@ -40,7 +41,8 @@ npm run validate:fixtures
 The validator parses every `.moo` file under `fixtures/valid` and fails if any
 parse tree contains an `ERROR` or `MISSING` node.
 
-To refresh fixtures from a local `moo-for-llms` checkout:
+To refresh fixtures from a local
+[`moo-for-llms`](https://github.com/SindomeCorp/moo-for-llms) checkout:
 
 ```sh
 MOO_FOR_LLMS=/path/to/moo-for-llms npm run import:fixtures:all

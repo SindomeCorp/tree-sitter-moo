@@ -24,7 +24,8 @@ When changing `grammar.js`:
 
 ## Fixture Changes
 
-Fixtures under `fixtures/valid` are imported from `moo-for-llms`.
+Fixtures under `fixtures/valid` are imported from
+[`moo-for-llms`](https://github.com/SindomeCorp/moo-for-llms).
 
 To refresh them:
 
