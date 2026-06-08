@@ -21,7 +21,8 @@
     "import:fixtures": "node scripts/import-fixtures.js",
     "import:fixtures:all": "node scripts/import-fixtures.js --all",
     "validate:fixtures": "env HOME=/tmp TREE_SITTER_DIR=/tmp node scripts/validate-fixtures.js fixtures/valid",
-    "ci": "npm run generate && npm test && npm run validate:fixtures && npm run build:wasm",
+    "validate:wasm": "node -e \"const fs = require('fs'); const wasm = fs.readFileSync('dist/tree-sitter-moo.wasm'); if (!WebAssembly.validate(wasm)) throw new Error('dist/tree-sitter-moo.wasm failed WebAssembly.validate');\"",
+    "ci": "npm run generate && npm test && npm run validate:fixtures && npm run build:wasm && npm run validate:wasm",
     "install": "node-gyp-build",
     "prepare:package": "npm run generate && npm run build:wasm",
     "prebuildify": "prebuildify --napi --strip"
