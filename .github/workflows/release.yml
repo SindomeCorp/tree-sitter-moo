@@ -62,13 +62,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate parser
-        run: npm run generate
-
-      - name: Build Wasm parser
-        if: runner.os != 'Windows'
-        run: npm run build:wasm
-
       - name: Build native prebuild
         run: npm run prebuildify
 

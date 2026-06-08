@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.2 - 2026-06-08
+
+### Fixed
+
+- Removed the unnecessary Wasm build from native prebuild jobs so macOS release
+  runners do not require `emcc`, Docker, or Podman.
+
 ## 0.2.1 - 2026-06-08
 
 ### Added
