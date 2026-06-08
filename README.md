@@ -73,6 +73,9 @@ npm run validate:fixtures
 Valid fixtures live under `fixtures/valid`. The strict validator parses every
 fixture and fails if the syntax tree contains `ERROR` or `MISSING`.
 
+See `fixtures/README.md` for fixture provenance, licensing, and import
+behavior.
+
 To refresh fixtures from a local `moo-for-llms` checkout:
 
 ```sh
@@ -288,13 +291,40 @@ Tree-sitter grammar. This repository has the generated parser and queries
 needed to build those integrations, but first-class Zed and VS Code extensions
 are not included yet.
 
+## Project Documents
+
+- `CHANGELOG.md`: release notes and known gaps
+- `CONTRIBUTING.md`: development and pull request workflow
+- `SECURITY.md`: security reporting policy
+- `ROADMAP.md`: planned follow-up work
+- `fixtures/README.md`: fixture provenance and validation policy
+
+## Package Targets
+
+The initial release is GitHub-first. The repository includes generated parser
+and binding files for common Tree-sitter package targets, but publishing to
+package registries is intentionally deferred until there is demand.
+
+Potential future package targets:
+
+- npm
+- crates.io
+- Python wheels
+- Swift Package Manager
+- Go modules
+
 ## Release Checklist
 
+For `v0.1.0`:
+
 1. Run `npm run ci`.
-2. Commit generated `src/parser.c`, `src/grammar.json`, and `src/node-types.json`.
-3. Push to GitHub and confirm Actions passes.
-4. Tag a release once the first public API shape is acceptable.
+2. Confirm fixture provenance in `fixtures/README.md`.
+3. Confirm `CHANGELOG.md` has release notes.
+4. Commit generated `src/parser.c`, `src/grammar.json`, and `src/node-types.json`.
+5. Push to GitHub and confirm Actions passes.
+6. Tag `v0.1.0`.
+7. Create a GitHub release using the `CHANGELOG.md` notes.
 
 ## License
 
-MIT
+MIT. See `LICENSE`.
