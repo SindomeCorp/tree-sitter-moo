@@ -1,0 +1,4 @@
+" bad:";
+" return [];";
+" fixed:";
+return {};

@@ -1,0 +1,86 @@
+==================
+Literals and values
+==================
+
+integer_value = 42;
+float_value = 3.5;
+string_value = "ready";
+error_value = E_INVARG;
+object_value = this;
+list_value = {integer_value, float_value, string_value, error_value, object_value};
+return list_value;
+
+---
+
+(source_file
+  (assignment_statement left: (identifier) right: (integer))
+  (assignment_statement left: (identifier) right: (float))
+  (assignment_statement left: (identifier) right: (string))
+  (assignment_statement left: (identifier) right: (error_constant))
+  (assignment_statement left: (identifier) right: (identifier))
+  (assignment_statement
+    left: (identifier)
+    right: (list_literal
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier)))
+  (return_statement (identifier)))
+
+==================
+Calls and operators
+==================
+
+name_text = this:name();
+verb_name = "name";
+computed_name = this:(verb_name)();
+parts = {"prefix-", computed_name};
+joined = tostr(@parts);
+is_ready = joined != "" && !(verb_name == "");
+return {name_text, computed_name, joined, is_ready};
+
+---
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    right: (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list)))
+  (assignment_statement left: (identifier) right: (string))
+  (assignment_statement
+    left: (identifier)
+    right: (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list)))
+  (assignment_statement
+    left: (identifier)
+    right: (list_literal
+      (string)
+      (identifier)))
+  (assignment_statement
+    left: (identifier)
+    right: (function_call
+      function: (identifier)
+      arguments: (argument_list
+        (splice_expression (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    right: (binary_expression
+      left: (binary_expression
+        left: (identifier)
+        right: (string))
+      right: (unary_expression
+        argument: (parenthesized_expression
+          (binary_expression
+            left: (identifier)
+            right: (string))))))
+  (return_statement
+    (list_literal
+      (identifier)
+      (identifier)
+      (identifier)
+      (identifier))))

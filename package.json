@@ -1,0 +1,67 @@
+{
+  "name": "tree-sitter-moo",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for ToastStunt/LambdaMOO verb code.",
+  "homepage": "https://github.com/SindomeCorp/tree-sitter-moo#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SindomeCorp/tree-sitter-moo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SindomeCorp/tree-sitter-moo/issues"
+  },
+  "type": "commonjs",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "env HOME=/tmp TREE_SITTER_DIR=/tmp tree-sitter test --config-path tree-sitter-config.json",
+    "parse:fixtures": "npm run validate:fixtures",
+    "import:fixtures": "node scripts/import-fixtures.js",
+    "import:fixtures:all": "node scripts/import-fixtures.js --all",
+    "validate:fixtures": "env HOME=/tmp TREE_SITTER_DIR=/tmp node scripts/validate-fixtures.js fixtures/valid",
+    "ci": "npm run generate && npm test && npm run validate:fixtures",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "keywords": [
+    "tree-sitter",
+    "moo",
+    "lambdamoo",
+    "toaststunt"
+  ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.6",
+    "prebuildify": "^6.0.0"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.moo",
+      "file-types": [
+        "moo"
+      ],
+      "highlights": "queries/highlights.scm"
+    }
+  ],
+  "dependencies": {
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  }
+}

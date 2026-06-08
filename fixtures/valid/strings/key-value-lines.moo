@@ -1,0 +1,13 @@
+":parse_key_value_lines(LIST lines) => LIST";
+"Called by import helpers for small human-authored key/value blocks.";
+{lines} = args;
+rows = {};
+for line in (lines)
+  divider = index(line, ":");
+  if (divider)
+    key = $string_utils:trim(line[1..divider - 1]);
+    value = $string_utils:trim(line[divider + 1..$]);
+    rows = {@rows, {key, value}};
+  endif
+endfor
+return rows;
