@@ -66,27 +66,131 @@ server-provided raw verb bodies.
 
 ## Neovim
 
-Add this to your Neovim config:
+These instructions assume you already use
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
+
+### Config File Location
+
+Put the Lua config in one of these places:
+
+- Single-file config: `~/.config/nvim/init.lua`
+- Modular config: `~/.config/nvim/lua/tree-sitter-moo.lua`, then add
+  `require("tree-sitter-moo")` from `init.lua`
+- LazyVim/lazy.nvim-style config:
+  `~/.config/nvim/lua/plugins/tree-sitter-moo.lua`
+
+### Minimal `init.lua` Setup
+
+Add this to `~/.config/nvim/init.lua` after loading `nvim-treesitter`:
 
 ```lua
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+local parsers = require("nvim-treesitter.parsers")
+local parser_config = parsers.get_parser_configs and parsers.get_parser_configs() or parsers
 
 parser_config.moo = {
   install_info = {
     url = "https://github.com/SindomeCorp/tree-sitter-moo",
     files = { "src/parser.c" },
     branch = "main",
+    queries = "queries/moo",
   },
   filetype = "moo",
 }
 
 vim.filetype.add({ extension = { moo = "moo" } })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "moo",
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
 ```
 
 Then run:
 
 ```vim
 :TSInstall moo
+```
+
+If your `nvim-treesitter` uses the current API, this also works from Lua:
+
+```vim
+:lua require("nvim-treesitter").install({ "moo" }):wait(300000)
+```
+
+Restart Neovim and verify a `.moo` file with:
+
+```vim
+:set filetype?
+:InspectTree
+```
+
+You should see `filetype=moo` and a parsed syntax tree.
+
+### lazy.nvim Example
+
+If you use `lazy.nvim`, create
+`~/.config/nvim/lua/plugins/tree-sitter-moo.lua`:
+
+```lua
+return {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    config = function()
+      local parsers = require("nvim-treesitter.parsers")
+      local parser_config = parsers.get_parser_configs and parsers.get_parser_configs() or parsers
+
+      parser_config.moo = {
+        install_info = {
+          url = "https://github.com/SindomeCorp/tree-sitter-moo",
+          files = { "src/parser.c" },
+          branch = "main",
+          queries = "queries/moo",
+        },
+        filetype = "moo",
+      }
+
+      vim.filetype.add({ extension = { moo = "moo" } })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "moo",
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
+  },
+}
+```
+
+Then restart Neovim and run:
+
+```vim
+:TSInstall moo
+```
+
+On the current `nvim-treesitter` rewrite, use this instead:
+
+```vim
+:lua require("nvim-treesitter").install({ "moo" }):wait(300000)
+```
+
+If you see `attempt to call field 'get_parser_configs' (a nil value)`, your
+`nvim-treesitter` is using the newer parser API. Use the examples above as-is;
+do not call `get_parser_configs()` directly.
+
+### Highlight Queries
+
+This repository includes Neovim runtime queries under `queries/moo/`. If
+highlighting does not start after installing the parser, add this repository to
+your Neovim runtime path or copy the query files:
+
+```sh
+mkdir -p ~/.config/nvim/queries/moo
+curl -L \
+  https://raw.githubusercontent.com/SindomeCorp/tree-sitter-moo/main/queries/moo/highlights.scm \
+  -o ~/.config/nvim/queries/moo/highlights.scm
 ```
 
 The same snippet is available in `nvim.lua`.
