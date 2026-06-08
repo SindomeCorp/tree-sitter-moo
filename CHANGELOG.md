@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.0 - 2026-06-08
+
+### Added
+
+- Browser-loadable `dist/tree-sitter-moo.wasm` package artifact.
+- `tree-sitter-moo/wasm` package export for downstream web editors.
+- Query file package exports for highlights and tags.
+- `tree-sitter.json` parser metadata for current Tree-sitter CLI tooling.
+- Public GitHub install documentation for downstream development consumers.
+
+### Changed
+
+- Updated CI to run the full package workflow, including Wasm generation and
+  `npm pack --dry-run`.
+- Updated generated parser artifacts with `tree-sitter-cli` 0.25.
+
 ## 0.1.0 - 2026-06-08
 
 Initial public release.

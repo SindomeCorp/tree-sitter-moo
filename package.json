@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-moo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Tree-sitter grammar for ToastStunt/LambdaMOO verb code.",
   "homepage": "https://github.com/SindomeCorp/tree-sitter-moo#readme",
   "repository": {
@@ -15,13 +15,15 @@
   "types": "bindings/node",
   "scripts": {
     "generate": "tree-sitter generate",
+    "build:wasm": "node -e \"require('fs').mkdirSync('dist', { recursive: true })\" && tree-sitter build --wasm -o dist/tree-sitter-moo.wasm",
     "test": "env HOME=/tmp TREE_SITTER_DIR=/tmp tree-sitter test --config-path tree-sitter-config.json",
     "parse:fixtures": "npm run validate:fixtures",
     "import:fixtures": "node scripts/import-fixtures.js",
     "import:fixtures:all": "node scripts/import-fixtures.js --all",
     "validate:fixtures": "env HOME=/tmp TREE_SITTER_DIR=/tmp node scripts/validate-fixtures.js fixtures/valid",
-    "ci": "npm run generate && npm test && npm run validate:fixtures",
+    "ci": "npm run generate && npm test && npm run validate:fixtures && npm run build:wasm",
     "install": "node-gyp-build",
+    "prepare:package": "npm run generate && npm run build:wasm",
     "prebuildify": "prebuildify --napi --strip"
   },
   "keywords": [
@@ -32,17 +34,26 @@
   ],
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
     "queries/**",
-    "src/**"
+    "src/**",
+    "dist/**"
   ],
+  "exports": {
+    ".": "./bindings/node/index.js",
+    "./wasm": "./dist/tree-sitter-moo.wasm",
+    "./queries/highlights": "./queries/highlights.scm",
+    "./queries/tags": "./queries/tags.scm",
+    "./package.json": "./package.json"
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "tree-sitter-cli": "^0.22.6",
-    "prebuildify": "^6.0.0"
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.25.10"
   },
   "tree-sitter": [
     {
@@ -54,13 +65,14 @@
     }
   ],
   "dependencies": {
+    "node-addon-api": "^8.8.0",
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
     "tree-sitter": "^0.21.0"
   },
   "peerDependenciesMeta": {
-    "tree_sitter": {
+    "tree-sitter": {
       "optional": true
     }
   }
