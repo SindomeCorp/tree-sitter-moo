@@ -29,13 +29,18 @@ ToastStunt-only forms such as maps, `MAP`, `WAIF`, `ANON`, and `BOOL` are
 accepted by default. A future dialect mode can distinguish ToastStunt from
 LambdaMOO when tooling needs that distinction.
 
-## Quick Start
+## Installation
 
 ```sh
 git clone https://github.com/SindomeCorp/tree-sitter-moo.git
 cd tree-sitter-moo
 npm ci
 npm run generate
+```
+
+Run the test suite:
+
+```sh
 npm test
 npm run validate:fixtures
 ```
@@ -46,6 +51,21 @@ Useful commands:
 npm run ci
 npm run parse:fixtures
 npx tree-sitter parse --config-path tree-sitter-config.json path/to/file.moo
+```
+
+## CLI Usage
+
+Use the Tree-sitter CLI directly when building tools, validating generated MOO,
+or giving an LLM a syntax tree to inspect:
+
+```sh
+npx tree-sitter parse --config-path tree-sitter-config.json path/to/file.moo
+```
+
+For quiet validation in scripts:
+
+```sh
+npm run validate:fixtures
 ```
 
 ## Fixtures
@@ -64,12 +84,16 @@ Without `MOO_FOR_LLMS`, the importer expects `../moo-for-llms`. It strips the
 training metadata string statements from imported examples so fixtures represent
 server-provided raw verb bodies.
 
-## Neovim
+## Editor Integration
+
+### Neovim
 
 These instructions assume you already use
 [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 
-### Config File Location
+Neovim is the primary tested editor integration for this grammar.
+
+#### Config File Location
 
 Put the Lua config in one of these places:
 
@@ -79,7 +103,7 @@ Put the Lua config in one of these places:
 - LazyVim/lazy.nvim-style config:
   `~/.config/nvim/lua/plugins/tree-sitter-moo.lua`
 
-### Minimal `init.lua` Setup
+#### Minimal `init.lua` Setup
 
 Add this to `~/.config/nvim/init.lua` after loading `nvim-treesitter`:
 
@@ -128,7 +152,7 @@ Restart Neovim and verify a `.moo` file with:
 
 You should see `filetype=moo` and a parsed syntax tree.
 
-### lazy.nvim Example
+#### lazy.nvim Example
 
 If you use `lazy.nvim`, create
 `~/.config/nvim/lua/plugins/tree-sitter-moo.lua`:
@@ -180,7 +204,7 @@ If you see `attempt to call field 'get_parser_configs' (a nil value)`, your
 `nvim-treesitter` is using the newer parser API. Use the examples above as-is;
 do not call `get_parser_configs()` directly.
 
-### Highlight Queries
+#### Highlight Queries
 
 This repository includes Neovim runtime queries under `queries/moo/`. If
 highlighting does not start after installing the parser, add this repository to
@@ -196,6 +220,73 @@ curl -L \
 The same snippet is available in `nvim.lua`.
 
 For local parser development, replace `url` with the path to your checkout.
+
+### Helix
+
+Add the grammar to `~/.config/helix/languages.toml`:
+
+```toml
+[[language]]
+name = "moo"
+scope = "source.moo"
+file-types = ["moo"]
+grammar = "moo"
+
+[[grammar]]
+name = "moo"
+source = { git = "https://github.com/SindomeCorp/tree-sitter-moo", rev = "main" }
+```
+
+Then fetch and build the grammar:
+
+```sh
+hx --grammar fetch
+hx --grammar build
+```
+
+Helix query lookup depends on your runtime path. If highlighting is not picked
+up automatically, copy the queries into your Helix runtime config:
+
+```sh
+mkdir -p ~/.config/helix/runtime/queries/moo
+curl -L \
+  https://raw.githubusercontent.com/SindomeCorp/tree-sitter-moo/main/queries/moo/highlights.scm \
+  -o ~/.config/helix/runtime/queries/moo/highlights.scm
+```
+
+Open a `.moo` file and run `:tree-sitter-scopes` or inspect highlighting to
+confirm the grammar loaded.
+
+### Emacs 29+
+
+Emacs can install and load the parser through its built-in Tree-sitter support.
+Add this to your Emacs config:
+
+```elisp
+(setq treesit-language-source-alist
+      '((moo "https://github.com/SindomeCorp/tree-sitter-moo" "main" "src")))
+
+(unless (treesit-language-available-p 'moo)
+  (treesit-install-language-grammar 'moo))
+
+(define-derived-mode moo-ts-mode prog-mode "MOO"
+  "Major mode for MOO using tree-sitter."
+  (when (treesit-ready-p 'moo)
+    (treesit-parser-create 'moo)))
+
+(add-to-list 'auto-mode-alist '("\\.moo\\'" . moo-ts-mode))
+```
+
+This gives Emacs a parser-backed MOO mode. Highlighting and indentation need
+additional Emacs mode work; the grammar and `queries/moo` files are the starting
+point.
+
+### Zed and VS Code
+
+Zed and VS Code usually need an editor-specific extension package around the
+Tree-sitter grammar. This repository has the generated parser and queries
+needed to build those integrations, but first-class Zed and VS Code extensions
+are not included yet.
 
 ## Release Checklist
 
