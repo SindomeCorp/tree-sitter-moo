@@ -17,7 +17,8 @@ _obj/
 
 # Python artifacts
 .venv/
-dist/
+dist/*
+!dist/tree-sitter-moo.wasm
 *.egg-info
 *.whl
 
@@ -34,5 +35,6 @@ dist/
 
 # Grammar volatiles
 *.wasm
+!dist/tree-sitter-moo.wasm
 *.obj
 *.o

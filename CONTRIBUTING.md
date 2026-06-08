@@ -4,6 +4,15 @@ Contributions are welcome.
 
 ## Development Setup
 
+The public GitHub repository can be consumed directly by downstream projects:
+
+```sh
+npm install github:SindomeCorp/tree-sitter-moo
+```
+
+Pin a tag or branch for repeatable downstream installs while development is
+active.
+
 ```sh
 git clone https://github.com/SindomeCorp/tree-sitter-moo.git
 cd tree-sitter-moo
@@ -11,6 +20,9 @@ npm ci
 npm run generate
 npm run ci
 ```
+
+`npm run ci` builds the browser Wasm artifact. Make sure `emcc`, Docker, or
+Podman is available before running it.
 
 ## Grammar Changes
 
@@ -20,7 +32,9 @@ When changing `grammar.js`:
 2. Add or update focused corpus tests under `test/corpus`.
 3. Run `npm test`.
 4. Run `npm run validate:fixtures`.
-5. Commit generated files under `src/` when they change.
+5. Run `npm run build:wasm`.
+6. Commit generated files under `src/` and `dist/tree-sitter-moo.wasm` when
+   they change.
 
 ## Fixture Changes
 

@@ -33,6 +33,21 @@ LambdaMOO when tooling needs that distinction.
 
 ## Installation
 
+Install directly from GitHub while the package is under active public
+development:
+
+```sh
+npm install github:SindomeCorp/tree-sitter-moo
+```
+
+Pin a tag or branch when consuming it from another project:
+
+```sh
+npm install github:SindomeCorp/tree-sitter-moo#v0.1.0
+```
+
+For local grammar development:
+
 ```sh
 git clone https://github.com/SindomeCorp/tree-sitter-moo.git
 cd tree-sitter-moo
@@ -302,19 +317,30 @@ are not included yet.
 - `ROADMAP.md`: planned follow-up work
 - `fixtures/README.md`: fixture provenance and validation policy
 
-## Package Targets
+## npm Package
 
-The initial release is GitHub-first. The repository includes generated parser
-and binding files for common Tree-sitter package targets, but publishing to
-package registries is intentionally deferred until there is demand.
+The npm package includes the native Node binding, generated parser sources,
+queries, and a browser-loadable Wasm parser artifact:
 
-Potential future package targets:
+- `tree-sitter-moo`: native Node binding entry point
+- `tree-sitter-moo/wasm`: `dist/tree-sitter-moo.wasm`
+- `tree-sitter-moo/queries/highlights`: highlight query file
+- `tree-sitter-moo/queries/tags`: tags query file
 
-- npm
-- crates.io
-- Python wheels
-- Swift Package Manager
-- Go modules
+Build the Wasm artifact with:
+
+```sh
+npm run build:wasm
+```
+
+The Tree-sitter CLI builds Wasm through Emscripten. Ensure `emcc`, Docker, or
+Podman is available before running `npm run build:wasm` or `npm run ci`.
+
+Before publishing or tagging a release, verify package contents with:
+
+```sh
+npm pack --dry-run
+```
 
 ## Release Checklist
 
@@ -323,7 +349,8 @@ For `v0.1.0`:
 1. Run `npm run ci`.
 2. Confirm fixture provenance in `fixtures/README.md`.
 3. Confirm `CHANGELOG.md` has release notes.
-4. Commit generated `src/parser.c`, `src/grammar.json`, and `src/node-types.json`.
+4. Commit generated `src/parser.c`, `src/grammar.json`, `src/node-types.json`,
+   and `dist/tree-sitter-moo.wasm`.
 5. Push to GitHub and confirm Actions passes.
 6. Tag `v0.1.0`.
 7. Create a GitHub release using the `CHANGELOG.md` notes.
