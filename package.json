@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-moo",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Tree-sitter grammar for ToastStunt/LambdaMOO verb code.",
   "homepage": "https://github.com/SindomeCorp/tree-sitter-moo#readme",
   "repository": {
@@ -22,6 +22,8 @@
     "import:fixtures:all": "node scripts/import-fixtures.js --all",
     "validate:fixtures": "env HOME=/tmp TREE_SITTER_DIR=/tmp node scripts/validate-fixtures.js fixtures/valid",
     "validate:wasm": "node -e \"const fs = require('fs'); const wasm = fs.readFileSync('dist/tree-sitter-moo.wasm'); if (!WebAssembly.validate(wasm)) throw new Error('dist/tree-sitter-moo.wasm failed WebAssembly.validate');\"",
+    "smoke:native": "node scripts/smoke-native.js",
+    "smoke:package": "node scripts/smoke-package.js",
     "ci": "npm run generate && npm test && npm run validate:fixtures && npm run build:wasm && npm run validate:wasm",
     "install": "node-gyp-build",
     "prepare:package": "npm run generate && npm run build:wasm",
@@ -34,6 +36,11 @@
     "toaststunt"
   ],
   "files": [
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "RELEASE.md",
+    "ROADMAP.md",
+    "SECURITY.md",
     "grammar.js",
     "tree-sitter.json",
     "binding.gyp",
@@ -50,8 +57,11 @@
     "./queries/tags": "./queries/tags.scm",
     "./package.json": "./package.json"
   },
-  "author": "",
+  "author": "SindomeCorp <slither@sindome.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "prebuildify": "^6.0.0",
     "tree-sitter-cli": "^0.25.10"

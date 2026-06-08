@@ -222,7 +222,7 @@ npm install github:SindomeCorp/tree-sitter-moo
 Pin a tag or branch when consuming it from another project:
 
 ```sh
-npm install github:SindomeCorp/tree-sitter-moo#v0.2.0
+npm install github:SindomeCorp/tree-sitter-moo#v0.2.1
 ```
 
 Use the package export to locate the Wasm file from Node-based tooling:
@@ -239,6 +239,43 @@ npm run build:wasm
 
 The Tree-sitter CLI builds Wasm through Emscripten. Ensure `emcc`, Docker, or
 Podman is available before running `npm run build:wasm` or `npm run ci`.
+
+## Use in Node
+
+Install the parser with the core Tree-sitter runtime:
+
+```sh
+npm install tree-sitter tree-sitter-moo
+```
+
+Parse MOO code from Node:
+
+```js
+const Parser = require("tree-sitter");
+const MOO = require("tree-sitter-moo");
+
+const parser = new Parser();
+parser.setLanguage(MOO);
+
+const source = 'player:tell("Hello from MOO.");';
+const tree = parser.parse(source);
+
+console.log(tree.rootNode.toString());
+```
+
+The package exports the native Node binding at `tree-sitter-moo` and node type
+metadata at `MOO.nodeTypeInfo`:
+
+```js
+const MOO = require("tree-sitter-moo");
+
+console.log(MOO.name);
+console.log(MOO.nodeTypeInfo.map((node) => node.type));
+```
+
+Native prebuilds are included for common Linux, macOS, and Windows targets. If
+no prebuild is available for your platform, npm falls back to building the
+binding from source with `node-gyp`.
 
 ## Use the CLI
 
@@ -349,22 +386,15 @@ server-provided raw verb bodies.
 
 - `CHANGELOG.md`: release notes and known gaps
 - `CONTRIBUTING.md`: development and pull request workflow
+- `RELEASE.md`: npm release workflow and checklist
 - `SECURITY.md`: security reporting policy
 - `ROADMAP.md`: planned follow-up work
 - `fixtures/README.md`: fixture provenance and validation policy
 
 ## Release Checklist
 
-For `v0.2.0`:
-
-1. Run `npm run ci`.
-2. Confirm fixture provenance in `fixtures/README.md`.
-3. Confirm `CHANGELOG.md` has release notes.
-4. Commit generated `src/parser.c`, `src/grammar.json`, `src/node-types.json`,
-   and `dist/tree-sitter-moo.wasm`.
-5. Push to GitHub and confirm Actions passes.
-6. Tag `v0.2.0`.
-7. Create a GitHub release using the `CHANGELOG.md` notes.
+See `RELEASE.md` for the npm release workflow, native prebuild targets,
+trusted publishing setup, and per-version release checklist.
 
 ## License
 

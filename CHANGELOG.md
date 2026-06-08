@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.1 - 2026-06-08
+
+### Added
+
+- npm release workflow that publishes only from `v*` tags.
+- Native prebuild release targets for Linux x64, Linux arm64, macOS x64,
+  macOS arm64, and Windows x64.
+- Package smoke tests for native bindings and Wasm artifacts.
+- Release documentation covering first publish, trusted publishing, and normal
+  release steps.
+
+### Changed
+
+- Added package metadata for the public npm release.
+- Included project documentation files in the npm package.
+
 ## 0.2.0 - 2026-06-08
 
 ### Added
