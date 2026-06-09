@@ -3,6 +3,33 @@
 Tree-sitter grammar for MOO verb code. The grammar targets ToastStunt as the
 initial superset dialect while keeping LambdaMOO compatibility in view.
 
+## Install
+
+Install the parser with the core Tree-sitter runtime:
+
+```sh
+npm install tree-sitter@^0.25.0 tree-sitter-moo
+```
+
+Parse MOO code from Node:
+
+```js
+const Parser = require("tree-sitter");
+const MOO = require("tree-sitter-moo");
+
+const parser = new Parser();
+parser.setLanguage(MOO);
+
+const source = 'player:tell("Hello from MOO.");';
+const tree = parser.parse(source);
+
+console.log(tree.rootNode.toString());
+```
+
+The package exports the native Node binding at `tree-sitter-moo`, a
+browser-loadable Wasm parser at `tree-sitter-moo/wasm`, and query files for
+editor integrations.
+
 ## Use in Editors
 
 ### Neovim
@@ -212,19 +239,6 @@ are not included yet.
 The npm package includes a browser-loadable Wasm parser artifact at
 `tree-sitter-moo/wasm`, which maps to `dist/tree-sitter-moo.wasm`.
 
-Install directly from GitHub while the package is under active public
-development:
-
-```sh
-npm install github:SindomeCorp/tree-sitter-moo
-```
-
-Pin a tag or branch when consuming it from another project:
-
-```sh
-npm install github:SindomeCorp/tree-sitter-moo#v0.2.5
-```
-
 Use the package export to locate the Wasm file from Node-based tooling:
 
 ```js
@@ -242,27 +256,6 @@ Podman is available before running `npm run build:wasm` or `npm run ci`.
 
 ## Use in Node
 
-Install the parser with the core Tree-sitter runtime:
-
-```sh
-npm install tree-sitter@^0.25.0 tree-sitter-moo
-```
-
-Parse MOO code from Node:
-
-```js
-const Parser = require("tree-sitter");
-const MOO = require("tree-sitter-moo");
-
-const parser = new Parser();
-parser.setLanguage(MOO);
-
-const source = 'player:tell("Hello from MOO.");';
-const tree = parser.parse(source);
-
-console.log(tree.rootNode.toString());
-```
-
 The package exports the native Node binding at `tree-sitter-moo` and node type
 metadata at `MOO.nodeTypeInfo`:
 
@@ -279,6 +272,12 @@ binding from source with `node-gyp`.
 
 The generated parser uses Tree-sitter language ABI 15, so the native Node
 binding requires `tree-sitter` 0.25 or newer.
+
+For development builds directly from GitHub, pin a tag or branch:
+
+```sh
+npm install github:SindomeCorp/tree-sitter-moo#v0.2.8
+```
 
 ## Use the CLI
 

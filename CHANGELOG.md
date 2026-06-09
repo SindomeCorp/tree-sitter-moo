@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.8 - 2026-06-09
+
+### Changed
+
+- Switched the npm release workflow from token publishing to npm trusted
+  publishing through GitHub Actions OIDC.
+- Updated package documentation to lead with npm installation for normal
+  consumers.
+
 ## 0.2.7 - 2026-06-09
 
 ### Fixed

@@ -35,20 +35,19 @@ Before publishing:
    - `publishConfig.access`: `public`
 4. Create a GitHub environment named `npm-publish`.
 
-## First npm Publish
+## Trusted Publishing Setup
 
 npm trusted publishing can only be configured after the package exists on the
-npm registry. For the first publish, use one temporary npm automation token:
+npm registry. Configure it once from a local shell where you are logged in to an
+npm account with write access to `tree-sitter-moo`:
 
-1. Create a short-lived npm granular access token that can publish
-   `tree-sitter-moo`.
-2. Add it as the `NPM_TOKEN` secret on the GitHub `npm-publish` environment.
-3. Push the version tag to GitHub.
-4. Confirm `tree-sitter-moo` appears on npm.
-5. Configure trusted publishing for future releases:
+1. Use Node `22.14.0` or newer.
+2. Install npm `11.15.0` or newer.
+3. Log in to npm.
+4. Create the trusted publisher:
 
    ```sh
-   npm install -g npm@latest
+   npm install -g npm@^11.15.0
    npm login
    npm trust github tree-sitter-moo \
      --repo SindomeCorp/tree-sitter-moo \
@@ -57,10 +56,19 @@ npm registry. For the first publish, use one temporary npm automation token:
      --allow-publish
    ```
 
-6. Delete the temporary `NPM_TOKEN` secret.
+5. Confirm the trusted publisher exists:
 
-After trusted publishing is configured, the release workflow publishes through
-GitHub Actions OIDC without a long-lived npm token.
+   ```sh
+   npm trust list tree-sitter-moo
+   ```
+
+6. Delete the old `NPM_TOKEN` secret from the GitHub `npm-publish` environment
+   and revoke the old npm automation token.
+7. After the first successful trusted publish, set the package publishing access
+   on npmjs.com to require 2FA and disallow tokens.
+
+The release workflow publishes through GitHub Actions OIDC without a long-lived
+npm token.
 
 ## Normal Release Checklist
 
