@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.4 - 2026-06-09
+
+### Fixed
+
+- Stopped requiring the Wasm binary to be byte-for-byte identical after the
+  release validation build. The release workflow still validates and packages a
+  freshly built Wasm artifact.
+
 ## 0.2.3 - 2026-06-08
 
 ### Fixed

@@ -28,8 +28,8 @@ jobs:
       - name: Run package CI
         run: npm run ci
 
-      - name: Verify generated artifacts are committed
-        run: git diff --exit-code -- src/parser.c src/grammar.json src/node-types.json dist/tree-sitter-moo.wasm
+      - name: Verify generated parser sources are committed
+        run: git diff --exit-code -- src/parser.c src/grammar.json src/node-types.json
 
   prebuild:
     name: Build native prebuild (${{ matrix.platform }})
