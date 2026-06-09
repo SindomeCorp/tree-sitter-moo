@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.3 - 2026-06-08
+
+### Fixed
+
+- Updated the macOS x64 release runner from deprecated `macos-13` to the
+  current Intel runner label, `macos-15-intel`.
+
 ## 0.2.2 - 2026-06-08
 
 ### Fixed
