@@ -276,7 +276,7 @@ binding requires `tree-sitter` 0.25 or newer.
 For development builds directly from GitHub, pin a tag or branch:
 
 ```sh
-npm install github:SindomeCorp/tree-sitter-moo#v0.2.8
+npm install github:SindomeCorp/tree-sitter-moo#v0.2.9
 ```
 
 ## Use the CLI

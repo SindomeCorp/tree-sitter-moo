@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.9 - 2026-06-09
+
+### Fixed
+
+- Kept the npm publish job on Node 22 while installing npm 11.15 for trusted
+  publishing, avoiding a Node 24 native build failure in the Tree-sitter
+  runtime dependency.
+
 ## 0.2.8 - 2026-06-09
 
 ### Changed
