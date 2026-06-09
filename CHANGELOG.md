@@ -4,13 +4,21 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
-## 0.2.6 - 2026-06-09
+## 0.2.7 - 2026-06-09
 
 ### Fixed
 
 - Declared the native Node binding's Tree-sitter 0.25 runtime requirement for
   the generated ABI 15 parser and expanded the smoke test to exercise
   `Parser.setLanguage`.
+- Committed regenerated parser metadata for the release version.
+
+## 0.2.6 - 2026-06-09
+
+### Fixed
+
+- Superseded by 0.2.7 after release validation found stale generated parser
+  metadata.
 
 ## 0.2.5 - 2026-06-09
 
