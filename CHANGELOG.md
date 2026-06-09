@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.5 - 2026-06-09
+
+### Fixed
+
+- Downloaded native prebuild artifacts into the `prebuilds/` package directory
+  before publishing and verified all five native prebuilds are present.
+
 ## 0.2.4 - 2026-06-09
 
 ### Fixed
