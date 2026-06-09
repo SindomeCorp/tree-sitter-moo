@@ -245,7 +245,7 @@ Podman is available before running `npm run build:wasm` or `npm run ci`.
 Install the parser with the core Tree-sitter runtime:
 
 ```sh
-npm install tree-sitter tree-sitter-moo
+npm install tree-sitter@^0.25.0 tree-sitter-moo
 ```
 
 Parse MOO code from Node:
@@ -276,6 +276,9 @@ console.log(MOO.nodeTypeInfo.map((node) => node.type));
 Native prebuilds are included for common Linux, macOS, and Windows targets. If
 no prebuild is available for your platform, npm falls back to building the
 binding from source with `node-gyp`.
+
+The generated parser uses Tree-sitter language ABI 15, so the native Node
+binding requires `tree-sitter` 0.25 or newer.
 
 ## Use the CLI
 
