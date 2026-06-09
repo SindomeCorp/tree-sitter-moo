@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.11 - 2026-06-09
+
+### Fixed
+
+- Wrote the Wasm smoke test's Tree-sitter config with an absolute parser
+  directory so Docker-backed Emscripten builds can mount the grammar correctly
+  in GitHub Actions.
+
 ## 0.2.10 - 2026-06-09
 
 ### Added

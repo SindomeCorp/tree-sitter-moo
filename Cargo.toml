@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-moo"
 description = "Moo grammar for tree-sitter"
-version = "0.2.10"
+version = "0.2.11"
 license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "moo"]

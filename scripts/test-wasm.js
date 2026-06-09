@@ -3,17 +3,21 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 
 const repoRoot = path.resolve(__dirname, '..');
-const parserConfig = path.join(repoRoot, 'tree-sitter-config.json');
 const treeSitter = path.join(repoRoot, 'node_modules', '.bin', 'tree-sitter');
 const tmpRoot = path.join(repoRoot, 'build', 'test-wasm');
 fs.mkdirSync(tmpRoot, { recursive: true });
 const tmp = fs.mkdtempSync(path.join(tmpRoot, 'run-'));
+const parserConfig = path.join(tmp, 'tree-sitter-config.json');
 const samplePath = path.join(tmp, 'sample.moo');
 const cachePath = path.join(tmpRoot, 'cache');
 const homePath = path.join(tmpRoot, 'home');
 fs.mkdirSync(cachePath, { recursive: true });
 fs.mkdirSync(homePath, { recursive: true });
 
+fs.writeFileSync(
+  parserConfig,
+  JSON.stringify({ 'parser-directories': [path.dirname(repoRoot)] }, null, 2),
+);
 fs.writeFileSync(samplePath, 'player:tell("Hello from MOO.");\nif ready\n  return [1..$];\nendif\n');
 
 const result = spawnSync(treeSitter, ['parse', '--wasm', '--config-path', parserConfig, samplePath], {
