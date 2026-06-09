@@ -1,0 +1,102 @@
+==================
+Collections, calls, and precedence
+==================
+
+a = ["x" -> 1, "y" -> 2];
+b = [1..10];
+c = values[2..$];
+d = values[..end_index];
+e = object.(prop_name);
+f = object:(verb_name)(@args);
+g = pass(1, 2);
+h = `object.prop ! E_PERM, E_INVARG => 0';
+i = ready ? "yes" | "no";
+j = value not in blocked && !(count >= 3);
+k = $math:max(+1, -2, 3 * 4);
+
+---
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    right: (map_literal
+      (map_entry
+        key: (string)
+        value: (integer))
+      (map_entry
+        key: (string)
+        value: (integer))))
+  (assignment_statement
+    left: (identifier)
+    right: (range_literal
+      start: (integer)
+      end: (integer)))
+  (assignment_statement
+    left: (identifier)
+    right: (range_expression
+      collection: (identifier)
+      start: (integer)
+      end: (dollar)))
+  (assignment_statement
+    left: (identifier)
+    right: (range_expression
+      collection: (identifier)
+      end: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    right: (computed_property_access
+      receiver: (identifier)
+      property: (identifier)))
+  (assignment_statement
+    left: (identifier)
+    right: (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list
+        (splice_expression
+          (identifier)))))
+  (assignment_statement
+    left: (identifier)
+    right: (pass_call
+      arguments: (argument_list
+        (integer)
+        (integer))))
+  (assignment_statement
+    left: (identifier)
+    right: (inline_error_expression
+      body: (property_access
+        receiver: (identifier)
+        property: (identifier))
+      errors: (error_constant)
+      errors: (error_constant)
+      fallback: (integer)))
+  (assignment_statement
+    left: (identifier)
+    right: (conditional_expression
+      condition: (identifier)
+      consequence: (string)
+      alternative: (string)))
+  (assignment_statement
+    left: (identifier)
+    right: (binary_expression
+      left: (binary_expression
+        left: (identifier)
+        right: (identifier))
+      right: (unary_expression
+        argument: (parenthesized_expression
+          (binary_expression
+            left: (identifier)
+            right: (integer))))))
+  (assignment_statement
+    left: (identifier)
+    right: (verb_call
+      receiver: (system_object)
+      verb: (identifier)
+      arguments: (argument_list
+        (unary_expression
+          argument: (integer))
+        (unary_expression
+          argument: (integer))
+        (binary_expression
+          left: (integer)
+          right: (integer))))))

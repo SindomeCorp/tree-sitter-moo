@@ -16,9 +16,30 @@ if (!Array.isArray(language.nodeTypeInfo)) {
 const parser = new Parser();
 parser.setLanguage(language);
 
-const tree = parser.parse('player:tell("Hello from MOO.");');
-if (!tree.rootNode.toString().includes("verb_call")) {
-  throw new Error("Native parser did not parse a sample verb call");
+const tree = parser.parse(`
+if ready
+  player:tell("Hello from MOO.");
+endif
+
+{name, ?label = "item", @rest} = args;
+result = [1..$];
+value = \`object.prop ! E_PERM => 0';
+`);
+
+const syntaxTree = tree.rootNode.toString();
+
+for (const nodeType of [
+  "if_statement",
+  "verb_call",
+  "scatter_pattern",
+  "optional_scatter_element",
+  "rest_scatter_element",
+  "range_literal",
+  "inline_error_expression",
+]) {
+  if (!syntaxTree.includes(nodeType)) {
+    throw new Error(`Native parser smoke sample did not include ${nodeType}`);
+  }
 }
 
 console.log(`Loaded ${language.name} native binding`);

@@ -4,8 +4,7 @@
 //! tree-sitter [Parser][], and then use the parser to parse some code:
 //!
 //! ```
-//! let code = r#"
-//! "#;
+//! let code = r#"player:tell("Hello from MOO.");"#;
 //! let mut parser = tree_sitter::Parser::new();
 //! parser.set_language(&tree_sitter_moo::language()).expect("Error loading Moo grammar");
 //! let tree = parser.parse(code, None).unwrap();
@@ -50,5 +49,27 @@ mod tests {
         parser
             .set_language(&super::language())
             .expect("Error loading Moo grammar");
+    }
+
+    #[test]
+    fn test_can_parse_sample_moo() {
+        let mut parser = tree_sitter::Parser::new();
+        parser
+            .set_language(&super::language())
+            .expect("Error loading Moo grammar");
+
+        let tree = parser
+            .parse(
+                "player:tell(\"Hello from MOO.\");\nif ready\n  return [1..$];\nendif\n",
+                None,
+            )
+            .expect("parser returned no tree");
+        let root = tree.root_node();
+        let sexp = root.to_sexp();
+
+        assert!(!root.has_error(), "expected sample MOO to parse without errors: {sexp}");
+        assert!(sexp.contains("verb_call"), "expected verb_call in parse tree: {sexp}");
+        assert!(sexp.contains("if_statement"), "expected if_statement in parse tree: {sexp}");
+        assert!(sexp.contains("range_literal"), "expected range_literal in parse tree: {sexp}");
     }
 }

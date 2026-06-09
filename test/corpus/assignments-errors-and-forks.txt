@@ -1,0 +1,81 @@
+==================
+Assignment targets, errors, and forks
+==================
+
+{name, ?label = "item", @rest} = args;
+object.name = value;
+object.(prop) = value;
+items[index] = value;
+items[start..finish] = value;
+
+try
+  risky();
+except err (E_PERM, E_INVARG) => fallback
+  return err;
+finally
+  cleanup();
+endtry
+
+fork worker (delay)
+  player:tell("later");
+endfork
+
+---
+
+(source_file
+  (assignment_statement
+    left: (scatter_pattern
+      (identifier)
+      (optional_scatter_element
+        name: (identifier)
+        default: (string))
+      (rest_scatter_element
+        name: (identifier)))
+    right: (identifier))
+  (assignment_statement
+    left: (property_access
+      receiver: (identifier)
+      property: (identifier))
+    right: (identifier))
+  (assignment_statement
+    left: (computed_property_access
+      receiver: (identifier)
+      property: (identifier))
+    right: (identifier))
+  (assignment_statement
+    left: (index_expression
+      collection: (identifier)
+      index: (identifier))
+    right: (identifier))
+  (assignment_statement
+    left: (range_expression
+      collection: (identifier)
+      start: (identifier)
+      end: (identifier))
+    right: (identifier))
+  (try_statement
+    (expression_statement
+      (function_call
+        function: (identifier)
+        arguments: (argument_list)))
+    (except_clause
+      variable: (identifier)
+      (error_constant)
+      (error_constant)
+      handler_value: (identifier)
+      (return_statement
+        (identifier)))
+    (finally_clause
+      (expression_statement
+        (function_call
+          function: (identifier)
+          arguments: (argument_list)))))
+  (fork_statement
+    name: (identifier)
+    delay: (identifier)
+    (expression_statement
+      (verb_call
+        receiver: (identifier)
+        verb: (identifier)
+        arguments: (argument_list
+          (string))))))

@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.10 - 2026-06-09
+
+### Added
+
+- Added a layered PR test suite with focused corpus tests, query validation,
+  fixture validation, generated-source checks, and binding smoke tests.
+- Added sample MOO parsing smoke coverage for Node, Go, Rust, Python, C, and
+  Wasm. Swift remains declared but documented as not CI-verified.
+- Added `TESTING.md`, `docs/USAGE.md`, `docs/EDITORS.md`, and
+  `docs/BINDINGS.md` to keep README focused while documenting usage, editor
+  setup, binding examples, and test tiers.
+
+### Changed
+
+- Standardized fixture validation docs on `npm run test:fixtures`.
+- Aligned Rust, Python, and Go binding metadata with the public
+  `SindomeCorp/tree-sitter-moo` repository and the 0.25 Tree-sitter runtime
+  requirement.
+- Moved inline package-script logic into dedicated scripts under `scripts/`.
+
 ## 0.2.9 - 2026-06-09
 
 ### Fixed

@@ -13,10 +13,13 @@ node_modules/
 
 # Go artifacts
 go.sum
+!bindings/go/go.sum
 _obj/
 
 # Python artifacts
 .venv/
+__pycache__/
+*.pyc
 dist/*
 !dist/tree-sitter-moo.wasm
 *.egg-info

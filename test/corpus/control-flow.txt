@@ -1,0 +1,66 @@
+==================
+Control flow
+==================
+
+if ready
+  player:tell("ready");
+elseif pending
+  continue;
+else
+  break;
+endif
+
+while count < 10
+  count += 1;
+endwhile
+
+for value in values
+  total = total + value;
+endfor
+
+for key, value in mapping
+  $logger:log(key, value);
+endfor
+
+---
+
+(source_file
+  (if_statement
+    condition: (identifier)
+    (expression_statement
+      (verb_call
+        receiver: (identifier)
+        verb: (identifier)
+        arguments: (argument_list
+          (string))))
+    (elseif_clause
+      condition: (identifier)
+      (continue_statement))
+    (else_clause
+      (break_statement)))
+  (while_statement
+    condition: (binary_expression
+      left: (identifier)
+      right: (integer))
+    (assignment_statement
+      left: (identifier)
+      right: (integer)))
+  (for_statement
+    value: (identifier)
+    collection: (identifier)
+    (assignment_statement
+      left: (identifier)
+      right: (binary_expression
+        left: (identifier)
+        right: (identifier))))
+  (for_statement
+    value: (identifier)
+    key: (identifier)
+    collection: (identifier)
+    (expression_statement
+      (verb_call
+        receiver: (system_object)
+        verb: (identifier)
+        arguments: (argument_list
+          (identifier)
+          (identifier))))))

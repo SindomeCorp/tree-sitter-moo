@@ -35,7 +35,7 @@ fixtures represent raw verb bodies as a MOO server would provide them.
 Run:
 
 ```sh
-npm run validate:fixtures
+npm run test:fixtures
 ```
 
 The validator parses every `.moo` file under `fixtures/valid` and fails if any
@@ -46,7 +46,7 @@ To refresh fixtures from a local
 
 ```sh
 MOO_FOR_LLMS=/path/to/moo-for-llms npm run import:fixtures:all
-npm run validate:fixtures
+npm run test:fixtures
 ```
 
 Without `MOO_FOR_LLMS`, the importer expects `../moo-for-llms`.

@@ -18,11 +18,15 @@ git clone https://github.com/SindomeCorp/tree-sitter-moo.git
 cd tree-sitter-moo
 npm ci
 npm run generate
-npm run ci
+npm run test:pr
 ```
 
-`npm run ci` builds the browser Wasm artifact. Make sure `emcc`, Docker, or
-Podman is available before running it.
+`npm run test:pr` is the normal pull-request suite. `npm run ci` also builds
+and validates the browser Wasm artifact, so make sure `emcc`, Docker, or Podman
+is available before running it.
+
+See [TESTING.md](TESTING.md) for the full test tier breakdown, binding test
+toolchain setup, and release-level checks.
 
 ## Grammar Changes
 
@@ -30,10 +34,12 @@ When changing `grammar.js`:
 
 1. Run `npm run generate`.
 2. Add or update focused corpus tests under `test/corpus`.
-3. Run `npm test`.
-4. Run `npm run validate:fixtures`.
-5. Run `npm run build:wasm`.
-6. Commit generated files under `src/` and `dist/tree-sitter-moo.wasm` when
+3. Run `npm run test:corpus`.
+4. Run `npm run test:fixtures`.
+5. Run `npm run test:queries` if node names or query captures changed.
+6. Run `npm run build:wasm` before release or when refreshing the committed Wasm artifact.
+7. Run `npm run test:pr` before opening a pull request.
+8. Commit generated files under `src/` and `dist/tree-sitter-moo.wasm` when
    they change.
 
 ## Fixture Changes
@@ -45,7 +51,7 @@ To refresh them:
 
 ```sh
 MOO_FOR_LLMS=/path/to/moo-for-llms npm run import:fixtures:all
-npm run validate:fixtures
+npm run test:fixtures
 ```
 
 Do not add invalid syntax examples under `fixtures/valid`. Valid fixtures must
@@ -63,4 +69,4 @@ Please include:
 
 - a short description of the grammar/editor behavior changed
 - tests or fixtures that exercise the change
-- confirmation that `npm run ci` passes
+- confirmation that `npm run test:pr` passes
