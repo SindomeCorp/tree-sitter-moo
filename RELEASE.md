@@ -98,7 +98,7 @@ GitHub Actions OIDC without a long-lived npm token.
 
    ```sh
    npm view tree-sitter-moo version dist-tags
-   npm install tree-sitter tree-sitter-moo
+   npm install tree-sitter@^0.25.0 tree-sitter-moo
    node -e 'const MOO = require("tree-sitter-moo"); console.log(MOO.name)'
    node -e 'console.log(require.resolve("tree-sitter-moo/wasm"))'
    ```
