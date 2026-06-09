@@ -222,7 +222,7 @@ npm install github:SindomeCorp/tree-sitter-moo
 Pin a tag or branch when consuming it from another project:
 
 ```sh
-npm install github:SindomeCorp/tree-sitter-moo#v0.2.2
+npm install github:SindomeCorp/tree-sitter-moo#v0.2.3
 ```
 
 Use the package export to locate the Wasm file from Node-based tooling:
