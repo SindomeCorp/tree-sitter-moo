@@ -1,3 +1,5 @@
+"Query validation comment.";
+
 if ready
   player:tell("ready");
 endif

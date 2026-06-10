@@ -43,6 +43,7 @@
 (integer) @number
 (float) @number.float
 (string) @string
+(comment) @comment
 
 [
   "="

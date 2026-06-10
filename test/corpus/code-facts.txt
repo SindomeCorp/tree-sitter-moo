@@ -1,0 +1,213 @@
+==================
+Fact extraction syntax surfaces
+==================
+
+"not a // comment";
+"Durable MOO string-literal comment.";
+message = "not a // comment";
+this:render();
+player:tell("Done");
+$string_utils:trim(foo);
+#20:notify(player);
+obj:foo(1, 2, 3);
+obj:(verb_name)(args);
+x = this.foo;
+this.foo = x;
+y = obj.(prop_name);
+obj.(prop_name) = y;
+z = #30;
+result = tostr(#30);
+
+---
+
+(source_file
+  (comment
+    (string))
+  (comment
+    (string))
+  (assignment_statement
+    left: (identifier)
+    right: (string))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list)))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list
+        (string))))
+  (expression_statement
+    (verb_call
+      receiver: (system_object)
+      verb: (identifier)
+      arguments: (argument_list
+        (identifier))))
+  (expression_statement
+    (verb_call
+      receiver: (object_reference)
+      verb: (identifier)
+      arguments: (argument_list
+        (identifier))))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list
+        (integer)
+        (integer)
+        (integer))))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (dynamic_verb_selector
+        name: (identifier))
+      arguments: (argument_list
+        (identifier))))
+  (assignment_statement
+    left: (identifier)
+    right: (property_access
+      receiver: (identifier)
+      property: (identifier)))
+  (assignment_statement
+    left: (property_access
+      receiver: (identifier)
+      property: (identifier))
+    right: (identifier))
+  (assignment_statement
+    left: (identifier)
+    right: (computed_property_access
+      receiver: (identifier)
+      property: (identifier)))
+  (assignment_statement
+    left: (computed_property_access
+      receiver: (identifier)
+      property: (identifier))
+    right: (identifier))
+  (assignment_statement
+    left: (identifier)
+    right: (object_reference))
+  (assignment_statement
+    left: (identifier)
+    right: (function_call
+      function: (identifier)
+      arguments: (argument_list
+        (object_reference)))))
+
+==================
+System object references
+==================
+
+$string_utils:trim(foo);
+x = $player;
+y = $room.location;
+
+---
+
+(source_file
+  (expression_statement
+    (verb_call
+      receiver: (system_object)
+      verb: (identifier)
+      arguments: (argument_list
+        (identifier))))
+  (assignment_statement
+    left: (identifier)
+    right: (system_object))
+  (assignment_statement
+    left: (identifier)
+    right: (property_access
+      receiver: (system_object)
+      property: (identifier))))
+
+==================
+Static and dynamic verb selectors
+==================
+
+obj:foo();
+obj:(verb_name)();
+this:render();
+player:tell("hi");
+#20:notify(player);
+$string_utils:trim(foo);
+obj.prop:render();
+
+---
+
+(source_file
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list)))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (dynamic_verb_selector
+        name: (identifier))
+      arguments: (argument_list)))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list)))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (identifier)
+      arguments: (argument_list
+        (string))))
+  (expression_statement
+    (verb_call
+      receiver: (object_reference)
+      verb: (identifier)
+      arguments: (argument_list
+        (identifier))))
+  (expression_statement
+    (verb_call
+      receiver: (system_object)
+      verb: (identifier)
+      arguments: (argument_list
+        (identifier))))
+  (expression_statement
+    (verb_call
+      receiver: (property_access
+        receiver: (identifier)
+        property: (identifier))
+      verb: (identifier)
+      arguments: (argument_list))))
+
+==================
+Property access read and write
+==================
+
+x = this.foo;
+this.foo = x;
+x = obj.(prop_name);
+obj.(prop_name) = x;
+
+---
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    right: (property_access
+      receiver: (identifier)
+      property: (identifier)))
+  (assignment_statement
+    left: (property_access
+      receiver: (identifier)
+      property: (identifier))
+    right: (identifier))
+  (assignment_statement
+    left: (identifier)
+    right: (computed_property_access
+      receiver: (identifier)
+      property: (identifier)))
+  (assignment_statement
+    left: (computed_property_access
+      receiver: (identifier)
+      property: (identifier))
+    right: (identifier)))

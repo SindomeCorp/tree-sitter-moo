@@ -54,7 +54,8 @@ return {name_text, computed_name, joined, is_ready};
     left: (identifier)
     right: (verb_call
       receiver: (identifier)
-      verb: (identifier)
+      verb: (dynamic_verb_selector
+        name: (identifier))
       arguments: (argument_list)))
   (assignment_statement
     left: (identifier)

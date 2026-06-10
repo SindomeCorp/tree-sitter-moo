@@ -47,10 +47,15 @@ Supported language surface includes:
 - ToastStunt map literals and map indexing
 - inline error-catching expressions
 - object refs, system objects, error constants, and type constants
+- durable MOO string-literal comments, exposed as `comment` nodes
 
 Version 1 parses raw verb bodies as provided by a MOO server. `.moo` files are
 treated as plain verb code with no wrapper metadata, object declarations, or
 database-dump syntax.
+
+Stored verb code uses standalone string-literal statements for durable comments.
+Parser-discarded forms such as `// ...` and `/* ... */` are not treated as MOO
+comments by this grammar because they are not portable stored verb code.
 
 ToastStunt-only forms such as maps, `MAP`, `WAIF`, `ANON`, and `BOOL` are
 accepted by default. A future dialect mode can distinguish ToastStunt from

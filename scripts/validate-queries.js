@@ -9,6 +9,7 @@ const treeSitter = path.join(repoRoot, 'node_modules', '.bin', 'tree-sitter');
 
 assertMirrors('highlights.scm');
 assertMirrors('tags.scm');
+assertMirrors('facts.scm');
 
 const highlights = runTreeSitter([
   'query',
@@ -31,6 +32,7 @@ for (const expected of [
   ['number', '1'],
   ['number.float', '2.5'],
   ['string', '"ready"'],
+  ['comment', '"Query validation comment.";'],
   ['property', 'name'],
   ['operator', '->'],
   ['punctuation.bracket', '{'],
@@ -47,6 +49,29 @@ runTreeSitter([
   path.join(repoRoot, 'queries', 'tags.scm'),
   fixture,
 ]);
+
+const facts = runTreeSitter([
+  'query',
+  '--captures',
+  '--config-path',
+  parserConfig,
+  path.join(repoRoot, 'queries', 'facts.scm'),
+  fixture,
+]);
+
+for (const expected of [
+  ['call.verb_call', 'player:tell("ready")'],
+  ['call.receiver', 'player'],
+  ['call.verb', 'tell'],
+  ['function.name', 'max'],
+  ['ref.system_object', '$math'],
+  ['ref.object', '#12'],
+  ['property.name', 'name'],
+  ['assignment.left', 'count'],
+  ['comment', '"Query validation comment.";'],
+]) {
+  assertCapture(facts.stdout, expected[0], expected[1]);
+}
 
 const tags = runTreeSitter([
   'tags',

@@ -30,6 +30,7 @@ module.exports = grammar({
     source_file: $ => repeat($._statement),
 
     _statement: $ => choice(
+      $.comment,
       $.empty_statement,
       $.assignment_statement,
       $.expression_statement,
@@ -44,6 +45,8 @@ module.exports = grammar({
     ),
 
     empty_statement: _ => ';',
+
+    comment: $ => prec(1, seq($.string, ';')),
 
     assignment_statement: $ => prec(2, seq(
       field('left', $._assignment_target),
@@ -241,9 +244,15 @@ module.exports = grammar({
     verb_call: $ => prec(PREC.CALL, seq(
       field('receiver', $._expression),
       ':',
-      field('verb', choice($.identifier, seq('(', $._expression, ')'))),
+      field('verb', choice($.identifier, $.dynamic_verb_selector)),
       field('arguments', $.argument_list)
     )),
+
+    dynamic_verb_selector: $ => seq(
+      '(',
+      field('name', $._expression),
+      ')'
+    ),
 
     property_access: $ => prec(PREC.CALL, seq(
       field('receiver', $._expression),

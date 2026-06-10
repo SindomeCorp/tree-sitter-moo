@@ -66,6 +66,7 @@
   "exports": {
     ".": "./bindings/node/index.js",
     "./wasm": "./dist/tree-sitter-moo.wasm",
+    "./queries/facts": "./queries/facts.scm",
     "./queries/highlights": "./queries/highlights.scm",
     "./queries/tags": "./queries/tags.scm",
     "./package.json": "./package.json"
