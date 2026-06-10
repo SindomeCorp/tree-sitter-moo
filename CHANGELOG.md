@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.12 - 2026-06-10
+
+### Added
+
+- Exposed durable MOO string-literal comment statements as named `comment`
+  nodes and added comment highlighting.
+- Added a `dynamic_verb_selector` node so static and computed verb selectors
+  are distinguishable in downstream code-fact extraction.
+- Added syntax-fact queries for calls, function calls, object references,
+  system objects, property access, assignments, and comments.
+- Added corpus coverage for code-fact extraction surfaces.
+
 ## 0.2.11 - 2026-06-09
 
 ### Fixed
