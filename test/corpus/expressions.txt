@@ -51,7 +51,8 @@ k = $math:max(+1, -2, 3 * 4);
     left: (identifier)
     right: (verb_call
       receiver: (identifier)
-      verb: (identifier)
+      verb: (dynamic_verb_selector
+        name: (identifier))
       arguments: (argument_list
         (splice_expression
           (identifier)))))
