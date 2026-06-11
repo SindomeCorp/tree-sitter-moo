@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
-## Unreleased
+## 0.2.13 - 2026-06-11
 
 ### Fixed
 
