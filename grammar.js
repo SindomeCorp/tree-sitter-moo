@@ -7,8 +7,9 @@ const PREC = {
   COMPARISON: 6,
   ADD: 7,
   MULTIPLY: 8,
-  UNARY: 9,
-  CALL: 10,
+  EXPONENT: 9,
+  UNARY: 10,
+  CALL: 11,
 };
 
 module.exports = grammar({
@@ -21,9 +22,8 @@ module.exports = grammar({
   word: $ => $.identifier,
 
   conflicts: $ => [
-    [$.scatter_pattern, $._expression],
+    [$._expression, $._binding_identifier],
     [$.argument_list, $.parenthesized_expression],
-    [$.rest_scatter_element, $._expression],
   ],
 
   rules: {
@@ -58,8 +58,8 @@ module.exports = grammar({
     expression_statement: $ => prec(-1, seq($._expression, ';')),
 
     return_statement: $ => seq('return', optional($._expression), ';'),
-    break_statement: _ => seq('break', ';'),
-    continue_statement: _ => seq('continue', ';'),
+    break_statement: $ => seq('break', optional(field('label', $._binding_identifier)), ';'),
+    continue_statement: $ => seq('continue', optional(field('label', $._binding_identifier)), ';'),
 
     if_statement: $ => seq(
       'if',
@@ -91,8 +91,8 @@ module.exports = grammar({
     for_statement: $ => seq(
       'for',
       choice(
-        seq(field('value', $.identifier), 'in', field('collection', $._expression)),
-        seq(field('value', $.identifier), ',', field('key', $.identifier), 'in', field('collection', $._expression))
+        seq(field('value', $._binding_identifier), 'in', field('collection', $._expression)),
+        seq(field('value', $._binding_identifier), ',', field('key', $._binding_identifier), 'in', field('collection', $._expression))
       ),
       repeat($._statement),
       'endfor'
@@ -128,7 +128,8 @@ module.exports = grammar({
     )),
 
     _assignment_target: $ => choice(
-      $.identifier,
+      $._binding_identifier,
+      $.system_object,
       $.scatter_pattern,
       $.property_access,
       $.computed_property_access,
@@ -139,7 +140,7 @@ module.exports = grammar({
     scatter_pattern: $ => seq(
       '{',
       optional(commaSep(choice(
-        $.identifier,
+        $._binding_identifier,
         $.optional_scatter_element,
         $.rest_scatter_element
       ))),
@@ -148,11 +149,11 @@ module.exports = grammar({
 
     optional_scatter_element: $ => seq(
       '?',
-      field('name', $.identifier),
+      field('name', $._binding_identifier),
       optional(seq('=', field('default', $._expression)))
     ),
 
-    rest_scatter_element: $ => seq('@', field('name', $.identifier)),
+    rest_scatter_element: $ => seq('@', field('name', $._binding_identifier)),
 
     _expression: $ => choice(
       $.assignment_expression,
@@ -172,6 +173,7 @@ module.exports = grammar({
       $.range_literal,
       $.list_literal,
       $.map_literal,
+      alias('pass', $.identifier),
       $.identifier,
       $.system_object,
       $.object_reference,
@@ -219,6 +221,11 @@ module.exports = grammar({
         field('operator', operator),
         field('right', $._expression)
       ))),
+      prec.right(PREC.EXPONENT, seq(
+        field('left', $._expression),
+        field('operator', '^'),
+        field('right', $._expression)
+      )),
       prec.left(PREC.COMPARISON, seq(
         field('left', $._expression),
         field('operator', choice('in', seq('not', 'in'))),
@@ -325,6 +332,11 @@ module.exports = grammar({
       field('errors', commaSep1($._expression)),
       optional(seq('=>', field('fallback', $._expression))),
       '\''
+    ),
+
+    _binding_identifier: $ => choice(
+      $.identifier,
+      alias($.type_constant, $.identifier)
     ),
 
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,

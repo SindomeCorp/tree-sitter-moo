@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## Unreleased
+
+### Fixed
+
+- Accepted valid ToastCore syntax for labeled `break` and `continue`
+  statements, exponentiation with `^`, system-object assignment targets,
+  uppercase assignment-target identifiers that collide with type constants,
+  and spliced `pass` arguments in dynamic verb calls.
+
 ## 0.2.12 - 2026-06-10
 
 ### Added

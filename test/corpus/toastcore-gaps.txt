@@ -1,0 +1,48 @@
+==================
+ToastCore syntax gaps
+==================
+
+continue p;
+break k;
+NUM = toint(x[2]);
+x = x + (n ^ i);
+$class_registry = {};
+fobj:(fverb)(@pass);
+return NUM;
+
+---
+
+(source_file
+  (continue_statement
+    label: (identifier))
+  (break_statement
+    label: (identifier))
+  (assignment_statement
+    left: (identifier)
+    right: (function_call
+      function: (identifier)
+      arguments: (argument_list
+        (index_expression
+          collection: (identifier)
+          index: (integer)))))
+  (assignment_statement
+    left: (identifier)
+    right: (binary_expression
+      left: (identifier)
+      right: (parenthesized_expression
+        (binary_expression
+          left: (identifier)
+          right: (identifier)))))
+  (assignment_statement
+    left: (system_object)
+    right: (list_literal))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (dynamic_verb_selector
+        name: (identifier))
+      arguments: (argument_list
+        (splice_expression
+          (identifier)))))
+  (return_statement
+    (type_constant)))
