@@ -12,6 +12,10 @@ try
   risky();
 except err (E_PERM, E_INVARG) => fallback
   return err;
+endtry
+
+try
+  cleanup_start();
 finally
   cleanup();
 endtry
@@ -64,12 +68,139 @@ endfork
       (error_constant)
       handler_value: (identifier)
       (return_statement
-        (identifier)))
+        (identifier))))
+  (try_statement
+    (expression_statement
+      (function_call
+        function: (identifier)
+        arguments: (argument_list)))
     (finally_clause
       (expression_statement
         (function_call
           function: (identifier)
           arguments: (argument_list)))))
+  (fork_statement
+    name: (identifier)
+    delay: (identifier)
+    (expression_statement
+      (verb_call
+        receiver: (identifier)
+        verb: (identifier)
+        arguments: (argument_list
+          (string))))))
+
+==================
+Multiple except clauses
+==================
+
+try
+  risky();
+except e_perm (E_PERM)
+  return e_perm;
+except e_invarg (E_INVARG)
+  return e_invarg;
+endtry
+
+---
+
+(source_file
+  (try_statement
+    (expression_statement
+      (function_call
+        function: (identifier)
+        arguments: (argument_list)))
+    (except_clause
+      variable: (identifier)
+      (error_constant)
+      (return_statement
+        (identifier)))
+    (except_clause
+      variable: (identifier)
+      (error_constant)
+      (return_statement
+        (identifier)))))
+
+==================
+Empty try body with finally
+==================
+
+try
+finally
+  cleanup();
+endtry
+
+---
+
+(source_file
+  (try_statement
+    (finally_clause
+      (expression_statement
+        (function_call
+          function: (identifier)
+          arguments: (argument_list))))))
+
+==================
+Unsupported mixed try handlers
+==================
+
+try
+  risky();
+except err (E_PERM)
+  return err;
+finally
+  cleanup();
+endtry
+
+---
+
+(source_file
+  (try_statement
+    (expression_statement
+      (function_call
+        function: (identifier)
+        arguments: (argument_list)))
+    (except_clause
+      variable: (identifier)
+      (error_constant)
+      (return_statement
+        (identifier))
+      (expression_statement
+        (identifier)
+        (MISSING ";"))
+      (expression_statement
+        (function_call
+          function: (identifier)
+          arguments: (argument_list))))))
+
+==================
+Unsupported empty try handler
+==================
+
+try
+  risky();
+endtry
+
+---
+
+(source_file
+  (ERROR
+    (expression_statement
+      (function_call
+        function: (identifier)
+        arguments: (argument_list)))
+    (identifier)))
+
+==================
+Forks
+==================
+
+fork worker (delay)
+  player:tell("later");
+endfork
+
+---
+
+(source_file
   (fork_statement
     name: (identifier)
     delay: (identifier)

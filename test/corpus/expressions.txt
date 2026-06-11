@@ -101,3 +101,52 @@ k = $math:max(+1, -2, 3 * 4);
         (binary_expression
           left: (integer)
           right: (integer))))))
+
+==================
+ToastStunt literals and operators
+==================
+
+pass = args[2];
+value = top ? value / 1e+24 | value * 1E-24;
+bits = (~red &. mask) ^. (blue >> 1);
+shifted = red << 5 |. green << 2;
+
+---
+
+(source_file
+  (assignment_statement
+    left: (identifier)
+    right: (index_expression
+      collection: (identifier)
+      index: (integer)))
+  (assignment_statement
+    left: (identifier)
+    right: (conditional_expression
+      condition: (identifier)
+      consequence: (binary_expression
+        left: (identifier)
+        right: (float))
+      alternative: (binary_expression
+        left: (identifier)
+        right: (float))))
+  (assignment_statement
+    left: (identifier)
+    right: (binary_expression
+      left: (parenthesized_expression
+        (binary_expression
+          left: (unary_expression
+            argument: (identifier))
+          right: (identifier)))
+      right: (parenthesized_expression
+        (binary_expression
+          left: (identifier)
+          right: (integer)))))
+  (assignment_statement
+    left: (identifier)
+    right: (binary_expression
+      left: (binary_expression
+        left: (identifier)
+        right: (integer))
+      right: (binary_expression
+        left: (identifier)
+        right: (integer)))))

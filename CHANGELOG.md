@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.14 - 2026-06-11
+
+### Fixed
+
+- Accepted additional valid ToastStunt syntax found in ToastCore, including
+  `pass` as a local binding, scientific-notation floats, bitwise operators,
+  bit shifts, unary bitwise complement, and `try` statements with either one or
+  more `except` handlers or a `finally` handler.
+
 ## 0.2.13 - 2026-06-11
 
 ### Fixed

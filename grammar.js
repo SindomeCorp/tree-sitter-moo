@@ -5,11 +5,13 @@ const PREC = {
   AND: 4,
   EQUALITY: 5,
   COMPARISON: 6,
-  ADD: 7,
-  MULTIPLY: 8,
-  EXPONENT: 9,
-  UNARY: 10,
-  CALL: 11,
+  BITWISE: 7,
+  SHIFT: 8,
+  ADD: 9,
+  MULTIPLY: 10,
+  EXPONENT: 11,
+  UNARY: 12,
+  CALL: 13,
 };
 
 module.exports = grammar({
@@ -101,8 +103,10 @@ module.exports = grammar({
     try_statement: $ => seq(
       'try',
       repeat($._statement),
-      repeat1($.except_clause),
-      optional($.finally_clause),
+      choice(
+        repeat1($.except_clause),
+        $.finally_clause
+      ),
       'endtry'
     ),
 
@@ -211,6 +215,11 @@ module.exports = grammar({
         ['<=', PREC.COMPARISON],
         ['>', PREC.COMPARISON],
         ['>=', PREC.COMPARISON],
+        ['|.', PREC.BITWISE],
+        ['&.', PREC.BITWISE],
+        ['^.', PREC.BITWISE],
+        ['<<', PREC.SHIFT],
+        ['>>', PREC.SHIFT],
         ['+', PREC.ADD],
         ['-', PREC.ADD],
         ['*', PREC.MULTIPLY],
@@ -234,7 +243,7 @@ module.exports = grammar({
     ),
 
     unary_expression: $ => prec(PREC.UNARY, seq(
-      field('operator', choice('!', '-', '+')),
+      field('operator', choice('!', '~', '-', '+')),
       field('argument', $._expression)
     )),
 
@@ -336,7 +345,8 @@ module.exports = grammar({
 
     _binding_identifier: $ => choice(
       $.identifier,
-      alias($.type_constant, $.identifier)
+      alias($.type_constant, $.identifier),
+      alias('pass', $.identifier)
     ),
 
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
@@ -345,8 +355,8 @@ module.exports = grammar({
     error_constant: _ => token(prec(1, /E_[A-Za-z0-9_]+/)),
     type_constant: _ => token(prec(1, choice('INT', 'FLOAT', 'STR', 'LIST', 'OBJ', 'ERR', 'NUM', 'MAP', 'WAIF', 'ANON', 'BOOL'))),
     dollar: _ => '$',
-    integer: _ => /[0-9]+/,
-    float: _ => /[0-9]+\.[0-9]+/,
+    integer: _ => token(prec(1, /[0-9]+/)),
+    float: _ => token(prec(2, /(?:[0-9]+\.[0-9]+(?:[eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)/)),
     string: _ => token(seq('"', repeat(choice(/[^"\\]/, /\\./)), '"')),
   }
 });
