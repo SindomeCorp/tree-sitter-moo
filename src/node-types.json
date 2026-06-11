@@ -145,6 +145,10 @@
           {
             "type": "scatter_pattern",
             "named": true
+          },
+          {
+            "type": "system_object",
+            "named": true
           }
         ]
       },
@@ -290,6 +294,10 @@
           },
           {
             "type": "scatter_pattern",
+            "named": true
+          },
+          {
+            "type": "system_object",
             "named": true
           }
         ]
@@ -573,6 +581,10 @@
             "named": false
           },
           {
+            "type": "^",
+            "named": false
+          },
+          {
             "type": "in",
             "named": false
           },
@@ -701,7 +713,18 @@
   {
     "type": "break_statement",
     "named": true,
-    "fields": {}
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "comment",
@@ -1283,7 +1306,18 @@
   {
     "type": "continue_statement",
     "named": true,
-    "fields": {}
+    "fields": {
+      "label": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "dynamic_verb_selector",
@@ -5496,6 +5530,10 @@
   },
   {
     "type": "]",
+    "named": false
+  },
+  {
+    "type": "^",
     "named": false
   },
   {
