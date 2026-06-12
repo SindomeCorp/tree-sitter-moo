@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.15 - 2026-06-11
+
+### Fixed
+
+- Parsed named `except` handlers whose binding names collide with uppercase
+  type constants, including ToastStunt's `except ERR (ANY)` form.
+
 ## 0.2.14 - 2026-06-11
 
 ### Fixed

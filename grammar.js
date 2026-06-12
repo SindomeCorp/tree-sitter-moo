@@ -112,8 +112,13 @@ module.exports = grammar({
 
     except_clause: $ => prec(1, seq(
       'except',
-      optional(field('variable', $.identifier)),
-      optional(seq('(', optional(commaSep1($._expression)), ')')),
+      choice(
+        seq(
+          field('variable', $._binding_identifier),
+          optional(seq('(', optional(commaSep1($._expression)), ')'))
+        ),
+        seq('(', optional(commaSep1($._expression)), ')')
+      ),
       optional(seq('=>', field('handler_value', $._expression))),
       repeat($._statement)
     )),

@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-moo",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "Tree-sitter grammar for ToastStunt/LambdaMOO verb code.",
   "homepage": "https://github.com/SindomeCorp/tree-sitter-moo#readme",
   "repository": {
