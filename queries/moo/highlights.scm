@@ -43,6 +43,8 @@
 (integer) @number
 (float) @number.float
 (string) @string
+(unterminated_string) @string
+(unterminated_string) @error
 (comment) @comment
 
 [

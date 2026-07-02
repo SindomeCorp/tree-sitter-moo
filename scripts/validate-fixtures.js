@@ -38,7 +38,7 @@ for (const file of files) {
 
   const output = `${result.stdout || ''}${result.stderr || ''}`;
 
-  if (result.status !== 0 || /\b(ERROR|MISSING)\b/.test(output)) {
+  if (result.status !== 0 || /\b(ERROR|MISSING|unterminated_string)\b/.test(output)) {
     failures.push({
       file: path.relative(repoRoot, file),
       status: result.status,
@@ -61,7 +61,7 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${files.length} fixtures with no ERROR or MISSING nodes.`);
+console.log(`Validated ${files.length} fixtures with no ERROR, MISSING, or unterminated_string nodes.`);
 
 function walk(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });

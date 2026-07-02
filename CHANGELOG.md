@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.16 - 2026-07-02
+
+### Fixed
+
+- Report unterminated string literals as `unterminated_string` nodes without
+  cascading into bogus missing `endif` or `endfor` recovery errors.
+
 ## 0.2.15 - 2026-06-11
 
 ### Fixed

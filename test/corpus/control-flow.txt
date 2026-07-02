@@ -64,3 +64,34 @@ endfor
         arguments: (argument_list
           (identifier)
           (identifier))))))
+
+==================
+Unterminated string recovery in control flow
+==================
+
+for x in sequence
+  if ok
+    return player:ooc_tell("broken.);
+  elseif done
+    return 1;
+  endif
+endfor
+
+---
+
+(source_file
+  (for_statement
+    value: (identifier)
+    collection: (identifier)
+    (if_statement
+      condition: (identifier)
+      (return_statement
+        (verb_call
+          receiver: (identifier)
+          verb: (identifier)
+          arguments: (argument_list
+            (unterminated_string))))
+      (elseif_clause
+        condition: (identifier)
+        (return_statement
+          (integer))))))

@@ -108,6 +108,10 @@
           "named": true
         },
         {
+          "type": "unterminated_string",
+          "named": true
+        },
+        {
           "type": "verb_call",
           "named": true
         }
@@ -254,6 +258,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -407,6 +415,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -520,6 +532,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -723,6 +739,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -870,6 +890,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -977,6 +1001,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -1096,6 +1124,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -1206,6 +1238,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -1313,6 +1349,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -1445,6 +1485,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -1623,6 +1667,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -1798,6 +1846,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -1963,6 +2015,10 @@
           "named": true
         },
         {
+          "type": "unterminated_string",
+          "named": true
+        },
+        {
           "type": "verb_call",
           "named": true
         },
@@ -2079,6 +2135,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unterminated_string",
           "named": true
         },
         {
@@ -2253,6 +2313,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -2443,6 +2507,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -2656,6 +2724,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -2834,6 +2906,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -2941,6 +3017,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -3060,6 +3140,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -3174,6 +3258,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -3281,6 +3369,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -3400,6 +3492,10 @@
           "named": true
         },
         {
+          "type": "unterminated_string",
+          "named": true
+        },
+        {
           "type": "verb_call",
           "named": true
         }
@@ -3515,6 +3611,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -3622,6 +3722,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -3756,6 +3860,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -3879,6 +3987,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unterminated_string",
           "named": true
         },
         {
@@ -4023,6 +4135,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -4139,6 +4255,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -4249,6 +4369,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -4356,6 +4480,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -4475,6 +4603,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -4582,6 +4714,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -4714,6 +4850,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "unterminated_string",
           "named": true
         },
         {
@@ -4915,6 +5055,10 @@
           "named": true
         },
         {
+          "type": "unterminated_string",
+          "named": true
+        },
+        {
           "type": "verb_call",
           "named": true
         }
@@ -5097,6 +5241,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -5245,6 +5393,10 @@
             "named": true
           },
           {
+            "type": "unterminated_string",
+            "named": true
+          },
+          {
             "type": "verb_call",
             "named": true
           }
@@ -5372,6 +5524,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "unterminated_string",
             "named": true
           },
           {
@@ -5690,6 +5846,10 @@
   },
   {
     "type": "type_constant",
+    "named": true
+  },
+  {
+    "type": "unterminated_string",
     "named": true
   },
   {

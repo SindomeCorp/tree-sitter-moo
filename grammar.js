@@ -191,6 +191,7 @@ module.exports = grammar({
       $.integer,
       $.float,
       $.string,
+      $.unterminated_string,
       $.dollar
     ),
 
@@ -362,7 +363,8 @@ module.exports = grammar({
     dollar: _ => '$',
     integer: _ => token(prec(1, /[0-9]+/)),
     float: _ => token(prec(2, /(?:[0-9]+\.[0-9]+(?:[eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)/)),
-    string: _ => token(seq('"', repeat(choice(/[^"\\]/, /\\./)), '"')),
+    string: _ => token(seq('"', repeat(choice(/[^"\\\r\n]/, /\\[^\r\n]/)), '"')),
+    unterminated_string: _ => token(seq('"', repeat(choice(/[^"\\\r\n;)\]}]/, /\\[^\r\n]/)))),
   }
 });
 

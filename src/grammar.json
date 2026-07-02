@@ -1030,6 +1030,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "unterminated_string"
+        },
+        {
+          "type": "SYMBOL",
           "name": "dollar"
         }
       ]
@@ -2632,11 +2636,11 @@
               "members": [
                 {
                   "type": "PATTERN",
-                  "value": "[^\"\\\\]"
+                  "value": "[^\"\\\\\\r\\n]"
                 },
                 {
                   "type": "PATTERN",
-                  "value": "\\\\."
+                  "value": "\\\\[^\\r\\n]"
                 }
               ]
             }
@@ -2644,6 +2648,34 @@
           {
             "type": "STRING",
             "value": "\""
+          }
+        ]
+      }
+    },
+    "unterminated_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\""
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "[^\"\\\\\\r\\n;)\\]}]"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "\\\\[^\\r\\n]"
+                }
+              ]
+            }
           }
         ]
       }
