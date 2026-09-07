@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## Unreleased - 2026-09-07
+
+### Changed
+
+- Add regression coverage for gambling credit session verbs and nested
+  `try`/`finally` cleanup with early returns and trailing metadata strings.
+  Standalone `try`/`finally` support is already available in 0.2.14 and later.
+
 ## 0.2.16 - 2026-07-02
 
 ### Fixed

@@ -1,0 +1,39 @@
+==================
+Nested try/finally with early return and trailing statements
+==================
+
+try
+  try
+    if failed
+      return 0;
+    endif
+  finally
+    inner = 0;
+  endtry
+finally
+  outer = 0;
+endtry
+return 1;
+"VMS VERSION 1.0";
+
+---
+
+(source_file
+  (try_statement
+    (try_statement
+      (if_statement
+        condition: (identifier)
+        (return_statement
+          (integer)))
+      (finally_clause
+        (assignment_statement
+          left: (identifier)
+          right: (integer))))
+    (finally_clause
+      (assignment_statement
+        left: (identifier)
+        right: (integer))))
+  (return_statement
+    (integer))
+  (comment
+    (string)))
