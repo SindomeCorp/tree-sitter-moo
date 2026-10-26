@@ -77,3 +77,16 @@ LambdaMOO when tooling needs that distinction.
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Node.js 26 validation
+
+Validated on Linux with **Node.js 26.12.1** on **2026-10-26**. The corpus tests, native Node binding smoke test, and WebAssembly test passed. The native binding was rebuilt from this checkout before verification. Other language-binding and release checks remain separate.
+
+With Node.js 26.12.1 selected, reproduce the checks with:
+
+```sh
+npm exec -- node-gyp rebuild
+npm test
+npm run smoke:native
+npm run test:wasm
+```
