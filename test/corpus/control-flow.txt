@@ -95,3 +95,39 @@ endfor
         condition: (identifier)
         (return_statement
           (integer))))))
+
+==================
+Missing if and elseif conditions
+==================
+
+if
+elseif
+endif
+
+if ready
+elseif
+else
+endif
+
+if
+return;
+endif
+
+if ready
+else
+endif
+
+---
+
+(source_file
+  (ERROR)
+  (if_statement
+    condition: (identifier)
+    (ERROR)
+    (else_clause))
+  (if_statement
+    condition: (MISSING identifier)
+    (return_statement))
+  (if_statement
+    condition: (identifier)
+    (else_clause)))

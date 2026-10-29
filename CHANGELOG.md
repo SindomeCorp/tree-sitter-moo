@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
+## 0.2.17 - 2026-10-29
+
+### Fixed
+
+- Reserve control-flow keywords during error recovery so block delimiters do
+  not become identifiers or produce misleading missing-semicolon diagnostics.
+  Keep keyword names valid as property and verb selectors.
+- Add nested `try`/`finally` regression coverage and the complete reported
+  `run_tests` verb. Standalone `try`/`finally` support, missing in 0.2.5, was
+  introduced in 0.2.14; consumers on older versions must upgrade and rebuild
+  their Wasm parser assets.
+
 ## 0.2.16 - 2026-07-02
 
 ### Fixed

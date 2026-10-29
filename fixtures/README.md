@@ -15,6 +15,10 @@ Copyright (c) 2026 The Sindome Corporation
 
 The import process is handled by `scripts/import-fixtures.js`.
 
+`fixtures/valid/regressions/run-tests-nested-finally.moo` is the complete
+user-reported dome-client verb used to reproduce missing-semicolon diagnostics
+from the 0.2.5 Wasm parser at the nested `finally` clause.
+
 ## Import Behavior
 
 The source examples in

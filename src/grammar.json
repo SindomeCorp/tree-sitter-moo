@@ -1931,7 +1931,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "identifier"
+                  "name": "_selector_identifier"
                 },
                 {
                   "type": "SYMBOL",
@@ -1995,7 +1995,7 @@
             "name": "property",
             "content": {
               "type": "SYMBOL",
-              "name": "identifier"
+              "name": "_selector_identifier"
             }
           }
         ]
@@ -2519,6 +2519,14 @@
       "type": "PATTERN",
       "value": "[A-Za-z_][A-Za-z0-9_]*"
     },
+    "_selector_identifier": {
+      "type": "RESERVED",
+      "content": {
+        "type": "SYMBOL",
+        "name": "identifier"
+      },
+      "context_name": "unreserved"
+    },
     "system_object": {
       "type": "PATTERN",
       "value": "\\$[A-Za-z_][A-Za-z0-9_]*"
@@ -2701,5 +2709,77 @@
   "externals": [],
   "inline": [],
   "supertypes": [],
-  "reserved": {}
+  "reserved": {
+    "global": [
+      {
+        "type": "STRING",
+        "value": "if"
+      },
+      {
+        "type": "STRING",
+        "value": "elseif"
+      },
+      {
+        "type": "STRING",
+        "value": "else"
+      },
+      {
+        "type": "STRING",
+        "value": "endif"
+      },
+      {
+        "type": "STRING",
+        "value": "while"
+      },
+      {
+        "type": "STRING",
+        "value": "endwhile"
+      },
+      {
+        "type": "STRING",
+        "value": "for"
+      },
+      {
+        "type": "STRING",
+        "value": "endfor"
+      },
+      {
+        "type": "STRING",
+        "value": "try"
+      },
+      {
+        "type": "STRING",
+        "value": "except"
+      },
+      {
+        "type": "STRING",
+        "value": "finally"
+      },
+      {
+        "type": "STRING",
+        "value": "endtry"
+      },
+      {
+        "type": "STRING",
+        "value": "fork"
+      },
+      {
+        "type": "STRING",
+        "value": "endfork"
+      },
+      {
+        "type": "STRING",
+        "value": "return"
+      },
+      {
+        "type": "STRING",
+        "value": "break"
+      },
+      {
+        "type": "STRING",
+        "value": "continue"
+      }
+    ],
+    "unreserved": []
+  }
 }

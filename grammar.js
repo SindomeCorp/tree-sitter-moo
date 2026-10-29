@@ -23,6 +23,31 @@ module.exports = grammar({
 
   word: $ => $.identifier,
 
+  // Block delimiters must not become identifiers during error recovery.
+  // Property and verb selectors explicitly allow these names below.
+  reserved: {
+    global: $ => [
+      'if',
+      'elseif',
+      'else',
+      'endif',
+      'while',
+      'endwhile',
+      'for',
+      'endfor',
+      'try',
+      'except',
+      'finally',
+      'endtry',
+      'fork',
+      'endfork',
+      'return',
+      'break',
+      'continue',
+    ],
+    unreserved: $ => [],
+  },
+
   conflicts: $ => [
     [$._expression, $._binding_identifier],
     [$.argument_list, $.parenthesized_expression],
@@ -266,7 +291,7 @@ module.exports = grammar({
     verb_call: $ => prec(PREC.CALL, seq(
       field('receiver', $._expression),
       ':',
-      field('verb', choice($.identifier, $.dynamic_verb_selector)),
+      field('verb', choice($._selector_identifier, $.dynamic_verb_selector)),
       field('arguments', $.argument_list)
     )),
 
@@ -279,7 +304,7 @@ module.exports = grammar({
     property_access: $ => prec(PREC.CALL, seq(
       field('receiver', $._expression),
       '.',
-      field('property', $.identifier)
+      field('property', $._selector_identifier)
     )),
 
     computed_property_access: $ => prec(PREC.CALL, seq(
@@ -356,6 +381,7 @@ module.exports = grammar({
     ),
 
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
+    _selector_identifier: $ => reserved('unreserved', $.identifier),
     system_object: _ => /\$[A-Za-z_][A-Za-z0-9_]*/,
     object_reference: _ => /#-?[0-9]+/,
     error_constant: _ => token(prec(1, /E_[A-Za-z0-9_]+/)),

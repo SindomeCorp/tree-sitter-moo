@@ -133,6 +133,7 @@ player:tell("hi");
 #20:notify(player);
 $string_utils:trim(foo);
 obj.prop:render();
+this:if();
 
 ---
 
@@ -177,6 +178,11 @@ obj.prop:render();
         receiver: (identifier)
         property: (identifier))
       verb: (identifier)
+      arguments: (argument_list)))
+  (expression_statement
+    (verb_call
+      receiver: (identifier)
+      verb: (identifier)
       arguments: (argument_list))))
 
 ==================
@@ -184,6 +190,7 @@ Property access read and write
 ==================
 
 x = this.foo;
+x = this.else;
 this.foo = x;
 x = obj.(prop_name);
 obj.(prop_name) = x;
@@ -191,6 +198,11 @@ obj.(prop_name) = x;
 ---
 
 (source_file
+  (assignment_statement
+    left: (identifier)
+    right: (property_access
+      receiver: (identifier)
+      property: (identifier)))
   (assignment_statement
     left: (identifier)
     right: (property_access

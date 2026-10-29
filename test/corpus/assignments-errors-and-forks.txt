@@ -206,9 +206,7 @@ endtry
       (error_constant)
       (return_statement
         (identifier))
-      (expression_statement
-        (identifier)
-        (MISSING ";"))
+      (ERROR)
       (expression_statement
         (function_call
           function: (identifier)
@@ -225,12 +223,13 @@ endtry
 ---
 
 (source_file
-  (ERROR
+  (try_statement
     (expression_statement
       (function_call
         function: (identifier)
         arguments: (argument_list)))
-    (identifier)))
+    (finally_clause
+      (MISSING "finally"))))
 
 ==================
 Forks
@@ -252,3 +251,35 @@ endfork
         verb: (identifier)
         arguments: (argument_list
           (string))))))
+
+==================
+Nested try finally restores player before outer cleanup
+==================
+
+try
+  try
+    player = actor;
+  finally
+    player = real_player;
+  endtry
+finally
+  cleanup();
+endtry
+
+---
+
+(source_file
+  (try_statement
+    (try_statement
+      (assignment_statement
+        left: (identifier)
+        right: (identifier))
+      (finally_clause
+        (assignment_statement
+          left: (identifier)
+          right: (identifier))))
+    (finally_clause
+      (expression_statement
+        (function_call
+          function: (identifier)
+          arguments: (argument_list))))))
