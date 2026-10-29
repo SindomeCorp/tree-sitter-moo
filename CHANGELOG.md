@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project uses semantic versioning for public releases.
 
-## 0.2.17 - 2026-10-29
+## 0.2.18 - 2026-10-29
 
 ### Fixed
 
@@ -15,6 +15,15 @@ This project uses semantic versioning for public releases.
   `run_tests` verb. Standalone `try`/`finally` support, missing in 0.2.5, was
   introduced in 0.2.14; consumers on older versions must upgrade and rebuild
   their Wasm parser assets.
+- Move the macOS ARM release build to `macos-15` so publishing works during
+  the macOS 14 runner retirement.
+
+## 0.2.17 - 2026-10-29
+
+### Fixed
+
+- Superseded by 0.2.18 before npm publication after the release hit the macOS
+  14 runner retirement brownout.
 
 ## 0.2.16 - 2026-07-02
 
